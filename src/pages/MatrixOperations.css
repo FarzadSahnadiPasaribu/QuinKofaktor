@@ -1,0 +1,99 @@
+.determinant-container {
+  background-color: #1e1e1e;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 2rem;
+}
+
+.determinant-title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #00ffc3;
+  font-weight: bold;
+}
+
+.determinant-widget-wrapper {
+  background-color: #2a2a2a;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(0, 255, 195, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.primary-button {
+  background-color: #00ffc3;
+  color: black;
+  font-weight: bold;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.primary-button:hover {
+  transform: scale(1.05);
+}
+
+.matrix-wrapper {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.operation-buttons,
+.button-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.matrix-result {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.matrix-result h2 {
+  margin-bottom: 1rem;
+  color: #00ffc3;
+}
+
+.matrix-table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+.matrix-table td {
+  border: 1px solid #00ffc3;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.size-selector {
+  margin-bottom: 1rem;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.size-selector select {
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 1rem;
+}

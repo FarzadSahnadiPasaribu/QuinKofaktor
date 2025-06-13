@@ -1,0 +1,131 @@
+.matrix-container {
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #1e1e1e;
+  color: white;
+}
+
+.controls {
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+button {
+  background-color: #28a745;
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+select {
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.matrix-section {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.matrix {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.matrix-row {
+  display: flex;
+  gap: 6px;
+}
+
+.matrix-cell {
+  width: 50px;
+  height: 50px;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #000;
+}
+
+.result {
+  background-color: #343a40;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* MatrixInput.css */
+.container {
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #1c1c1c;
+  color: white;
+}
+
+.controls {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.controls select,
+.controls button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  background-color: #3a3a3a;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.controls select:hover,
+.controls button:hover {
+  background-color: #575757;
+}
+
+.matrix-section {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 60px);
+  gap: 10px;
+}
+
+.matrix-cell {
+  width: 60px;
+  height: 60px;
+  font-size: 18px;
+  text-align: center;
+  border-radius: 12px;
+  border: none;
+  background-color: #f0f0f0;
+  box-shadow: 2px 2px 5px #00000055;
+  outline: none;
+}
+
+.matrix-cell:focus {
+  background-color: #ffffff;
+  border: 2px solid #888;
+}
