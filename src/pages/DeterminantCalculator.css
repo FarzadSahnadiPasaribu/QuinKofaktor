@@ -65,3 +65,20 @@
   color: #ffffff;
   margin-top: 0.5rem;
 }
+.steps-box {
+  margin-top: 1.5rem;
+  background-color: #1a1a1a;
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  color: #ccc;
+  text-align: left;
+  max-width: 90%;
+  overflow-x: auto;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.steps-text {
+  white-space: pre-wrap;
+  font-size: 14px;
+  line-height: 1.6;
+}

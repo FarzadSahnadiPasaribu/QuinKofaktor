@@ -9,6 +9,7 @@ function MatrixOperations() {
   const [matrixB, setMatrixB] = useState(Array(4).fill().map(() => Array(4).fill('')));
   const [result, setResult] = useState(null);
   const [operationLabel, setOperationLabel] = useState('');
+  const [steps, setSteps] = useState([]);
 
   const navigate = useNavigate();
 
@@ -31,33 +32,46 @@ function MatrixOperations() {
     const A = parseMatrix(matrixA);
     const B = parseMatrix(matrixB);
     const res = A.map((row, i) => row.map((val, j) => val + B[i][j]));
+    const stepDesc = A.map((row, i) =>
+      row.map((val, j) => `${val} + ${B[i][j]} = ${val + B[i][j]}`)
+    );
     setResult(res);
     setOperationLabel('Hasil Penjumlahan');
+    setSteps(stepDesc);
   };
 
   const subtractMatrices = () => {
     const A = parseMatrix(matrixA);
     const B = parseMatrix(matrixB);
     const res = A.map((row, i) => row.map((val, j) => val - B[i][j]));
+    const stepDesc = A.map((row, i) =>
+      row.map((val, j) => `${val} - ${B[i][j]} = ${val - B[i][j]}`)
+    );
     setResult(res);
     setOperationLabel('Hasil Pengurangan');
+    setSteps(stepDesc);
   };
 
   const multiplyMatrices = () => {
     const A = parseMatrix(matrixA);
     const B = parseMatrix(matrixB);
     const res = Array(size).fill().map(() => Array(size).fill(0));
+    const stepDesc = Array(size).fill().map(() => Array(size).fill(''));
 
     for (let i = 0; i < size; i++) {
       for (let j = 0; j < size; j++) {
+        let calcSteps = [];
         for (let k = 0; k < size; k++) {
+          calcSteps.push(`${A[i][k]}×${B[k][j]}`);
           res[i][j] += A[i][k] * B[k][j];
         }
+        stepDesc[i][j] = `${calcSteps.join(' + ')} = ${res[i][j]}`;
       }
     }
 
     setResult(res);
     setOperationLabel('Hasil Perkalian');
+    setSteps(stepDesc);
   };
 
   const handleSizeChange = (e) => {
@@ -66,15 +80,16 @@ function MatrixOperations() {
     setMatrixA(Array(newSize).fill().map(() => Array(newSize).fill('')));
     setMatrixB(Array(newSize).fill().map(() => Array(newSize).fill('')));
     setResult(null);
+    setSteps([]);
   };
 
-  // PENAMBAHAN: fungsi tombol
   const generateRandomMatrices = () => {
     const randomMatrix = () =>
       Array(size).fill().map(() => Array(size).fill().map(() => Math.floor(Math.random() * 10)));
     setMatrixA(randomMatrix());
     setMatrixB(randomMatrix());
     setResult(null);
+    setSteps([]);
   };
 
   const refreshMatrices = () => {
@@ -83,12 +98,13 @@ function MatrixOperations() {
     setMatrixA(emptyMatrix());
     setMatrixB(emptyMatrix());
     setResult(null);
+    setSteps([]);
   };
 
   return (
     <div className="determinant-container">
       <h1 className="determinant-title">Operasi Matriks</h1>
-      
+
       <div className="size-selector">
         <label>Ukuran Matriks:</label>
         <select value={size} onChange={handleSizeChange}>
@@ -139,6 +155,19 @@ function MatrixOperations() {
                 ))}
               </tbody>
             </table>
+
+            <div className="steps-section">
+              <h3>Langkah-langkah perhitungan:</h3>
+              <ul>
+                {steps.map((row, i) => (
+                  <li key={i}>
+                    {row.map((text, j) => (
+                      <div key={j}>Elemen [{i + 1},{j + 1}]: {text}</div>
+                    ))}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         )}
       </div>

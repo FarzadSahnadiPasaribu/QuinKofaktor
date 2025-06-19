@@ -8,6 +8,7 @@ function DeterminantCalculator() {
     Array(5).fill().map(() => Array(5).fill(''))
   );
   const [result, setResult] = useState(null);
+  const [steps, setSteps] = useState([]); // langkah-langkah perhitungan
 
   const navigate = useNavigate();
 
@@ -23,18 +24,22 @@ function DeterminantCalculator() {
     );
     setMatrix(randomMatrix);
     setResult(null);
+    setSteps([]);
   };
 
   const refreshMatrix = () => {
     const clearedMatrix = matrix.map(row => row.map(() => ''));
     setMatrix(clearedMatrix);
     setResult(null);
+    setSteps([]);
   };
 
   const calculateDeterminant = () => {
     const toNumberMatrix = matrix.map(row => row.map(val => Number(val)));
+    const newSteps = [];
+    let stepIndex = 1;
 
-    const determinant = (m) => {
+    const determinant = (m, level = 0) => {
       const n = m.length;
       if (n === 1) return m[0][0];
       if (n === 2)
@@ -45,14 +50,30 @@ function DeterminantCalculator() {
         const subMatrix = m.slice(1).map(row =>
           row.filter((_, j) => j !== col)
         );
-        const cofactor = ((col % 2 === 0 ? 1 : -1) * m[0][col]);
-        det += cofactor * determinant(subMatrix);
+        const sign = (col % 2 === 0 ? 1 : -1);
+        const cofactor = sign * m[0][col];
+        const subDet = determinant(subMatrix, level + 1);
+        const term = cofactor * subDet;
+        det += term;
+
+        if (level === 0) {
+          newSteps.push(
+            `Langkah ${stepIndex++}:`,
+            `Ambil elemen baris ke-1 kolom ke-${col + 1}: ${m[0][col]}`,
+            `Hilangkan baris ke-1 dan kolom ke-${col + 1}, lalu hitung determinan minor: ${subDet}`,
+            `Cofactor = ${m[0][col]} × (-1)⁽¹⁺${col + 1}⁾ = ${cofactor}`,
+            `Perkalian cofactor × minor: ${cofactor} × ${subDet} = ${term}`,
+            `Jumlah sementara determinan: ${det}`,
+            '----------------------------------'
+          );
+        }
       }
       return det;
     };
 
     const resultValue = determinant(toNumberMatrix);
     setResult(resultValue);
+    setSteps(newSteps);
   };
 
   return (
@@ -83,6 +104,17 @@ function DeterminantCalculator() {
           <div className="result-box">
             <p>Hasil determinan:</p>
             <div className="result-value">{result}</div>
+          </div>
+        )}
+
+        {steps.length > 0 && (
+          <div className="steps-box">
+            <h3 className="steps-title">Langkah-langkah Perhitungan:</h3>
+            <div className="steps-text">
+              {steps.map((step, index) => (
+                <p key={index}>{step}</p>
+              ))}
+            </div>
           </div>
         )}
       </div>
